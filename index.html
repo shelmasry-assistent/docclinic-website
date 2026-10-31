@@ -1,1 +1,459 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DocClinic - Smart and simple medical clinic management software.">
+<title>DocClinic | Smart Clinic Management</title>
+
+<style>
+:root {
+  --navy:#102b46;
+  --blue:#176b87;
+  --teal:#25b6a4;
+  --light:#f1f7fa;
+  --text:#243b4d;
+  --muted:#687d8c;
+}
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
+body {
+  margin:0;
+  font-family:Arial,"Segoe UI",sans-serif;
+  color:var(--text);
+}
+a {text-decoration:none;color:inherit}
+.container {width:90%;max-width:1150px;margin:auto}
+
+header {
+  background:white;
+  border-bottom:1px solid #e5edf1;
+  position:sticky;top:0;z-index:10;
+}
+nav {
+  min-height:75px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+.logo {
+  font-size:25px;
+  font-weight:bold;
+  color:var(--navy);
+}
+.logo span {color:var(--teal)}
+.navlinks {display:flex;gap:25px;align-items:center}
+.navlinks a:hover {color:var(--teal)}
+.btn {
+  display:inline-block;
+  background:var(--teal);
+  color:#073b40;
+  padding:13px 23px;
+  border-radius:9px;
+  font-weight:bold;
+  border:0;
+  cursor:pointer;
+}
+.btn:hover {background:#38c8b4}
+.btn-outline {
+  background:transparent;
+  color:white;
+  border:1px solid #ffffff88;
+}
+.hero {
+  background:linear-gradient(120deg,#102b46,#176b87);
+  color:white;
+  padding:95px 0;
+}
+.hero-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:45px;
+  align-items:center;
+}
+.hero h1 {
+  font-size:50px;
+  line-height:1.15;
+  margin:15px 0;
+}
+.hero p {
+  font-size:18px;
+  line-height:1.8;
+  color:#dceaf0;
+}
+.hero-image {
+  background:#fff;
+  color:var(--navy);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:0 15px 45px #071b2c66;
+}
+.mock-header {
+  background:var(--navy);
+  color:white;
+  padding:15px;
+  border-radius:8px;
+  font-weight:bold;
+}
+.mock-content {
+  background:#f2f7f9;
+  padding:20px;
+  margin-top:12px;
+  border-radius:8px;
+}
+.mock-stats {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.mock-stat {
+  background:white;
+  padding:18px 8px;
+  border-radius:8px;
+  text-align:center;
+  font-size:13px;
+}
+.mock-stat strong {
+  display:block;
+  color:var(--blue);
+  font-size:18px;
+  margin-bottom:5px;
+}
+section {padding:75px 0}
+.section-title {
+  text-align:center;
+  margin-bottom:45px;
+}
+.section-title h2 {
+  font-size:34px;
+  color:var(--navy);
+  margin-bottom:12px;
+}
+.section-title p {color:var(--muted)}
+.features {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.feature {
+  border:1px solid #e1eaf0;
+  border-radius:14px;
+  padding:25px;
+  transition:.2s;
+}
+.feature:hover {
+  transform:translateY(-5px);
+  box-shadow:0 10px 30px #102b4612;
+}
+.feature .icon {font-size:35px}
+.feature h3 {color:var(--navy)}
+.feature p {color:var(--muted);line-height:1.7}
+.screens {background:var(--light)}
+.screen-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+.screen {
+  background:white;
+  border-radius:13px;
+  overflow:hidden;
+  border:1px solid #e0e9ee;
+}
+.screen-placeholder {
+  height:190px;
+  background:#e6f0f4;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#597687;
+  padding:15px;
+}
+.screen h3 {padding:0 18px}
+.screen p {
+  padding:0 18px 15px;
+  color:var(--muted);
+}
+.download {
+  background:var(--navy);
+  color:white;
+  text-align:center;
+}
+.download h2 {font-size:35px}
+.download p {
+  color:#d5e5ed;
+  max-width:650px;
+  margin:15px auto 25px;
+  line-height:1.8;
+}
+.register {
+  background:var(--light);
+}
+.register-card {
+  max-width:650px;
+  margin:auto;
+  background:white;
+  padding:35px;
+  border-radius:16px;
+  text-align:center;
+  border:1px solid #e0e9ee;
+}
+.register-card p {
+  color:var(--muted);
+  line-height:1.8;
+}
+.notice {
+  background:#fff6df;
+  padding:15px;
+  border-radius:9px;
+  color:#725b26;
+  font-size:14px;
+}
+footer {
+  background:#0b2034;
+  color:white;
+  padding:30px 0;
+  text-align:center;
+}
+footer p {color:#b6c8d3;font-size:13px}
+.arabic {
+  direction:rtl;
+  font-family:Tahoma,Arial,sans-serif;
+}
+@media(max-width:800px) {
+  .hero-grid {grid-template-columns:1fr}
+  .features {grid-template-columns:repeat(2,1fr)}
+  .screen-grid {grid-template-columns:repeat(2,1fr)}
+  .hero h1 {font-size:38px}
+  .navlinks {gap:10px}
+}
+@media(max-width:520px) {
+  .navlinks a:not(.btn) {display:none}
+  .features,.screen-grid {grid-template-columns:1fr}
+  .hero {padding:60px 0}
+  .hero h1 {font-size:34px}
+  section {padding:55px 0}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container">
+<nav>
+  <a class="logo" href="#">✚ Doc<span>Clinic</span></a>
+  <div class="navlinks">
+    <a href="#features">Features</a>
+    <a href="#screens">Screenshots</a>
+    <a href="#download">Download</a>
+    <a href="#register" class="btn">Get Started</a>
+  </div>
+</nav>
+</div>
+</header>
+
+<main>
+
+<section class="hero">
+<div class="container hero-grid">
+
+<div>
+  <h1>Your Clinic.<br>Smarter Management.</h1>
+  <p>
+    DocClinic is a medical clinic management application
+    designed to help doctors organize patients, appointments,
+    clinical encounters, prescriptions and laboratory requests.
+  </p>
+  <a href="#register" class="btn">Get Free Trial</a>
+  <a href="#features" class="btn btn-outline">Explore Features</a>
+  <p class="arabic">
+    برنامج متكامل لمساعدة الأطباء في تنظيم وإدارة العيادة الطبية.
+  </p>
+</div>
+
+<div class="hero-image">
+  <div class="mock-header">✚ DocClinic Dashboard</div>
+  <div class="mock-content">
+    <h3>Clinic Overview</h3>
+    <div class="mock-stats">
+      <div class="mock-stat"><strong>Patients</strong>Records</div>
+      <div class="mock-stat"><strong>Visits</strong>Encounters</div>
+      <div class="mock-stat"><strong>Schedule</strong>Appointments</div>
+    </div>
+    <br>
+    <h3>Clinic Workspace</h3>
+    <p>Patient Records</p>
+    <p>Clinical Encounters</p>
+    <p>Prescriptions & Laboratory</p>
+  </div>
+  <p style="text-align:center;font-size:12px;color:#687d8c">
+    Illustrative preview – actual screenshots coming soon
+  </p>
+</div>
+
+</div>
+</section>
+
+<section id="features">
+<div class="container">
+
+<div class="section-title">
+  <h2>Powerful Clinic Features</h2>
+  <p>Everything organized in one medical workspace.</p>
+</div>
+
+<div class="features">
+
+<div class="feature">
+  <div class="icon">👨‍⚕️</div>
+  <h3>Patient Management</h3>
+  <p>Organize patient information and medical records.</p>
+</div>
+
+<div class="feature">
+  <div class="icon">📅</div>
+  <h3>Appointments</h3>
+  <p>Manage appointments and daily patient schedules.</p>
+</div>
+
+<div class="feature">
+  <div class="icon">🩺</div>
+  <h3>Clinical Encounters</h3>
+  <p>Record complaints, symptoms, examination and clinical notes.</p>
+</div>
+
+<div class="feature">
+  <div class="icon">💊</div>
+  <h3>Prescriptions</h3>
+  <p>Prepare and print prescriptions for your patients.</p>
+</div>
+
+<div class="feature">
+  <div class="icon">🧪</div>
+  <h3>Laboratory Requests</h3>
+  <p>Organize laboratory tests and requests.</p>
+</div>
+
+<div class="feature">
+  <div class="icon">🧠</div>
+  <h3>Diagnostic Support</h3>
+  <p>Structured clinical information to support the doctor's assessment.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="screens" id="screens">
+<div class="container">
+
+<div class="section-title">
+  <h2>Explore DocClinic</h2>
+  <p>Take a look at the main application screens.</p>
+</div>
+
+<div class="screen-grid">
+
+<div class="screen">
+  <div class="screen-placeholder">Dashboard Screenshot</div>
+  <h3>Dashboard</h3>
+  <p>Your clinic workspace.</p>
+</div>
+
+<div class="screen">
+  <div class="screen-placeholder">Patient Records Screenshot</div>
+  <h3>Patient Records</h3>
+  <p>Patient details and history.</p>
+</div>
+
+<div class="screen">
+  <div class="screen-placeholder">Clinical Encounter Screenshot</div>
+  <h3>Clinical Encounter</h3>
+  <p>Clinical documentation.</p>
+</div>
+
+<div class="screen">
+  <div class="screen-placeholder">Prescription Screenshot</div>
+  <h3>Prescriptions</h3>
+  <p>Prescription preparation and printing.</p>
+</div>
+
+<div class="screen">
+  <div class="screen-placeholder">Appointments Screenshot</div>
+  <h3>Appointments</h3>
+  <p>Daily appointment management.</p>
+</div>
+
+<div class="screen">
+  <div class="screen-placeholder">Laboratory Screenshot</div>
+  <h3>Laboratory</h3>
+  <p>Laboratory requests management.</p>
+</div>
+
+</div>
+</div>
+</section>
+
+<section class="download" id="download">
+<div class="container">
+  <h2>Try DocClinic Today</h2>
+  <p>
+    Interested in improving your clinic workflow?
+    Register your interest to receive information about
+    the DocClinic trial version.
+  </p>
+  <a href="#register" class="btn">Request Free Trial</a>
+</div>
+</section>
+
+<section class="register" id="register">
+<div class="container">
+
+<div class="register-card">
+  <h2>Doctor Registration</h2>
+  <p>
+    Register your interest in DocClinic.
+    Our registration form and download link will be available soon.
+  </p>
+
+  <div class="notice">
+    <strong>Registration is being prepared.</strong><br>
+    The official Google Form and verified application download
+    link will be connected here.
+  </div>
+
+  <p class="arabic">
+    قريباً يمكنك تسجيل بياناتك والحصول على النسخة التجريبية من البرنامج.
+  </p>
+</div>
+
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="container">
+  <h2>✚ DocClinic</h2>
+  <p>Smart Clinic Management Software</p>
+  <p>
+    © <span id="year"></span> DocClinic. All rights reserved.
+  </p>
+  <p>
+    Clinical decisions remain the responsibility of the treating physician.
+  </p>
+</div>
+</footer>
+
+<script>
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
+
+</body>
+</html>
+
