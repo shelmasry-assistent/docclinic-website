@@ -152,9 +152,26 @@ section {padding:75px 0}
 .feature p {color:var(--muted);line-height:1.7}
 .screens {background:var(--light)}
 .screen-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.screen img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: #f1f5f9;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 700px) {
+  .screen-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .screen {
   background: white;
