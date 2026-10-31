@@ -167,7 +167,18 @@ section {padding:75px 0}
   padding: 10px;
   box-sizing: border-box;
 }
+.screen a {
+  display: block;
+  cursor: zoom-in;
+}
 
+.screen img {
+  transition: transform 0.25s ease;
+}
+
+.screen a:hover img {
+  transform: scale(1.02);
+}
 @media (max-width: 700px) {
   .screen-grid {
     grid-template-columns: 1fr;
