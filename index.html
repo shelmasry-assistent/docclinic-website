@@ -187,11 +187,23 @@ section {padding:75px 0}
   width: 100%;
 }
 .screen {
+  width: 100%;
   background: white;
-  border-radius: 13px;
+  border-radius: 14px;
   overflow: hidden;
   border: 1px solid #e0e9ee;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0 3px 12px rgba(16,42,70,0.06);
+}
+
+.screen h3 {
+  padding: 5px 24px;
+  font-size: 22px;
+}
+
+.screen p {
+  padding: 0 24px 20px;
+  font-size: 16px;
+  color: var(--muted);
 }
 
 .screen:hover {
