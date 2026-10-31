@@ -152,94 +152,62 @@ section {padding:75px 0}
 .feature p {color:var(--muted);line-height:1.7}
 .screens {background:var(--light)}
 .screen-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px;
-}
-
-.screen img {
-  width: 100%;
-  height: 400px;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  background: #f1f5f9;
-  padding: 10px;
-  box-sizing: border-box;
-}
-.screen a {
-  display: block;
-  cursor: zoom-in;
-}
-
-.screen img {
-  transition: transform 0.25s ease;
-}
-
-.screen a:hover img {
-  transform: scale(1.02);
-}
-@media (max-width: 700px) {
- .screen-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 35px;
-  width: 100%;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:32px;
+  width:100%;
 }
 .screen {
-  width: 100%;
-  background: white;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid #e0e9ee;
-  box-shadow: 0 3px 12px rgba(16,42,70,0.06);
+  width:100%;
+  overflow:hidden;
+  background:#fff;
+  border:1px solid #e0e9ee;
+  border-radius:16px;
+  box-shadow:0 3px 14px rgba(16,42,70,.07);
+  transition:transform .2s ease,box-shadow .2s ease;
 }
-
-.screen h3 {
-  padding: 5px 24px;
-  font-size: 22px;
-}
-
-.screen p {
-  padding: 0 24px 20px;
-  font-size: 16px;
-  color: var(--muted);
-}
-
 .screen:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(16, 42, 70, 0.12);
+  transform:translateY(-4px);
+  box-shadow:0 12px 28px rgba(16,42,70,.12);
 }
-.screen-placeholder {
-  height:190px;
-  background:#e6f0f4;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:#597687;
-  padding:15px;
+.screen a {
+  display:block;
+  cursor:zoom-in;
+  background:#f1f5f9;
 }
-.screen h3 {padding:0 18px}
+.screen img {
+  display:block;
+  width:100%;
+  height:auto;
+  max-width:100%;
+  padding:12px;
+  background:#f1f5f9;
+  transition:transform .25s ease;
+}
+.screen a:hover img {transform:scale(1.01)}
+.screen h3 {
+  margin:0;
+  padding:20px 24px 6px;
+  color:var(--navy);
+  font-size:22px;
+}
 .screen p {
-  padding:0 18px 15px;
+  margin:0;
+  padding:0 24px 22px;
   color:var(--muted);
+  line-height:1.6;
+}
+@media(max-width:520px) {
+  .screen-grid {gap:22px}
+  .screen {border-radius:12px}
+  .screen img {padding:8px}
+  .screen h3 {padding:16px 18px 5px;font-size:20px}
+  .screen p {padding:0 18px 18px}
 }
 .download {
   background:var(--navy);
   color:white;
   text-align:center;
-}
-  .screen img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: none;
-  object-fit: contain;
-  object-position: center;
-  padding: 12px;
-  box-sizing: border-box;
-  background: #f1f5f9;
 }
 .download h2 {font-size:35px}
 .download p {
@@ -417,79 +385,87 @@ footer p {color:#b6c8d3;font-size:13px}
 
 <div class="screen-grid">
 
-<div class="screen">
-  <div class="screen-placeholder">Dashboard Screenshot</div>
-  <h3>Dashboard</h3>
-  <p>Your clinic workspace.</p>
-</div>
+  <article class="screen">
+    <a href="0001.png" target="_blank" rel="noopener" aria-label="Open Dashboard screenshot at full size">
+      <img src="0001.png" alt="DocClinic Dashboard">
+    </a>
+    <h3>Dashboard</h3>
+    <p>Clinic overview and patient queue.</p>
+  </article>
 
-<div class="screen">
-  <div class="screen-placeholder">Patient Records Screenshot</div>
-  <h3>Patient Records</h3>
-  <p>Patient details and history.</p>
-</div>
+  <article class="screen">
+    <a href="001_.png" target="_blank" rel="noopener" aria-label="Open Clinical Encounter screenshot at full size">
+      <img src="001_.png" alt="DocClinic Clinical Screen">
+    </a>
+    <h3>Clinical Encounter</h3>
+    <p>Clinical documentation and patient assessment.</p>
+  </article>
 
-<div class="screen">
-  <a href="0001.png" target="_blank">
-  <img src="0001.png" alt="DocClinic Dashboard">
-</a>
-  <h3>Dashboard</h3>
-  <p>Clinic overview and patient queue.</p>
-</div>
+  <article class="screen">
+    <a href="002_screen_002_FULL.png" target="_blank" rel="noopener" aria-label="Open Patient Management screenshot at full size">
+      <img src="002_screen_002_FULL.png" alt="DocClinic Patient List">
+    </a>
+    <h3>Patient Management</h3>
+    <p>Patient records and information management.</p>
+  </article>
 
-<div class="screen">
-  <img src="001_.png" alt="DocClinic Clinical Screen">
-  <h3>Clinical Encounter</h3>
-  <p>Clinical documentation and patient assessment.</p>
-</div>
+  <article class="screen">
+    <a href="003_screen_003_FULL.png" target="_blank" rel="noopener" aria-label="Open Patient Queue screenshot at full size">
+      <img src="003_screen_003_FULL.png" alt="DocClinic Patient Queue">
+    </a>
+    <h3>Patient Queue</h3>
+    <p>Organized patient workflow.</p>
+  </article>
 
-<div class="screen">
-  <img src="002_screen_002_FULL.png" alt="DocClinic Patient List">
-  <h3>Patient Management</h3>
-  <p>Patient records and information management.</p>
-</div>
+  <article class="screen">
+    <a href="005_screen_005_FULL.png" target="_blank" rel="noopener" aria-label="Open Medical Library screenshot at full size">
+      <img src="005_screen_005_FULL.png" alt="DocClinic Medical Library">
+    </a>
+    <h3>Medical Library</h3>
+    <p>Medical knowledge and clinical references.</p>
+  </article>
 
-<div class="screen">
-  <img src="003_screen_003_FULL.png" alt="DocClinic Patient Queue">
-  <h3>Patient Queue</h3>
-  <p>Organized patient workflow.</p>
-</div>
+  <article class="screen">
+    <a href="006_screen_006_FULL.png" target="_blank" rel="noopener" aria-label="Open Data Management screenshot at full size">
+      <img src="006_screen_006_FULL.png" alt="DocClinic Data Screen">
+    </a>
+    <h3>Data Management</h3>
+    <p>Structured clinic information.</p>
+  </article>
 
-<div class="screen">
-  <img src="005_screen_005_FULL.png" alt="DocClinic Medical Library">
-  <h3>Medical Library</h3>
-  <p>Medical knowledge and clinical references.</p>
-</div>
+  <article class="screen">
+    <a href="007_screen_007_FULL.png" target="_blank" rel="noopener" aria-label="Open Clinic Overview screenshot at full size">
+      <img src="007_screen_007_FULL.png" alt="DocClinic Analytics">
+    </a>
+    <h3>Clinic Overview</h3>
+    <p>Clinic statistics and performance information.</p>
+  </article>
 
-<div class="screen">
-  <img src="006_screen_006_FULL.png" alt="DocClinic Data Screen">
-  <h3>Data Management</h3>
-  <p>Structured clinic information.</p>
-</div>
+  <article class="screen">
+    <a href="008_screen_008_FULL.png" target="_blank" rel="noopener" aria-label="Open Clinical Documentation screenshot at full size">
+      <img src="008_screen_008_FULL.png" alt="DocClinic Clinical Documentation">
+    </a>
+    <h3>Clinical Documentation</h3>
+    <p>Detailed clinical workflow.</p>
+  </article>
 
-<div class="screen">
-  <img src="007_screen_007_FULL.png" alt="DocClinic Analytics">
-  <h3>Clinic Overview</h3>
-  <p>Clinic statistics and performance information.</p>
-</div>
+  <article class="screen">
+    <a href="009_screen_009_FULL.png" target="_blank" rel="noopener" aria-label="Open Medical Record screenshot at full size">
+      <img src="009_screen_009_FULL.png" alt="DocClinic Medical Record">
+    </a>
+    <h3>Medical Record</h3>
+    <p>Patient encounter details.</p>
+  </article>
 
-<div class="screen">
-  <img src="008_screen_008_FULL.png" alt="DocClinic Clinical Documentation">
-  <h3>Clinical Documentation</h3>
-  <p>Detailed clinical workflow.</p>
-</div>
+  <article class="screen">
+    <a href="010_screen_010_FULL.png" target="_blank" rel="noopener" aria-label="Open Clinical Workflow screenshot at full size">
+      <img src="010_screen_010_FULL.png" alt="DocClinic Clinical Workflow">
+    </a>
+    <h3>Clinical Workflow</h3>
+    <p>Integrated clinical documentation.</p>
+  </article>
 
-<div class="screen">
-  <img src="009_screen_009_FULL.png" alt="DocClinic Medical Record">
-  <h3>Medical Record</h3>
-  <p>Patient encounter details.</p>
 </div>
-
-<div class="screen">
-  <img src="010_screen_010_FULL.png" alt="DocClinic Clinical Workflow">
-  <h3>Clinical Workflow</h3>
-  <p>Integrated clinical documentation.</p>
-</div></div>
 </div>
 </section>
 
@@ -551,4 +527,5 @@ document.getElementById("year").textContent =
 
 </body>
 </html>
+
 
