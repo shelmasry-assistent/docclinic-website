@@ -180,9 +180,11 @@ section {padding:75px 0}
   transform: scale(1.02);
 }
 @media (max-width: 700px) {
-  .screen-grid {
-    grid-template-columns: 1fr;
-  }
+ .screen-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 35px;
+  width: 100%;
 }
 .screen {
   background: white;
@@ -217,14 +219,15 @@ section {padding:75px 0}
   text-align:center;
 }
   .screen img {
+  display: block;
   width: 100%;
-  height: 260px;
+  height: auto;
+  max-height: none;
   object-fit: contain;
   object-position: center;
-  display: block;
-  background: #f1f5f9;
-  padding: 8px;
+  padding: 12px;
   box-sizing: border-box;
+  background: #f1f5f9;
 }
 .download h2 {font-size:35px}
 .download p {
