@@ -1,531 +1,390 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="DocClinic - Smart and simple medical clinic management software.">
-<title>DocClinic | Smart Clinic Management</title>
-
+<title>DocClinic | برنامج عيادتك</title>
+<meta name="description" content="DocClinic: برنامج إدارة عيادة بيشتغل من غير نت وبيفهم تخصصك — أسنان، جلدية، باطنة، غدد وسكر، أطفال، نسا، علاج طبيعي.">
+<link rel="icon" href="img/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --navy:#102b46;
-  --blue:#176b87;
-  --teal:#25b6a4;
-  --light:#f1f7fa;
-  --text:#243b4d;
-  --muted:#687d8c;
+:root{
+  --ink:#0f2a3f; --ink2:#36506a; --muted:#6b7f90; --line:#dde7ee;
+  --bg:#ffffff; --soft:#f3f8fa; --brand:#0f766e; --brand2:#14b8a6; --brandInk:#053b37;
+  --warn:#fff7e6; --warnInk:#7a5410; --radius:16px;
 }
-* {box-sizing:border-box}
-html {scroll-behavior:smooth}
-body {
-  margin:0;
-  font-family:Arial,"Segoe UI",sans-serif;
-  color:var(--text);
-}
-a {text-decoration:none;color:inherit}
-.container {width:90%;max-width:1150px;margin:auto}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;font-size:16px}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 16px}
+[data-l]{display:none}
+html[lang="ar"] [data-l="ar"], html[lang="en"] [data-l="en"]{display:revert}
+html[lang="en"] body{font-family:system-ui,"Segoe UI",Arial,sans-serif}
 
-header {
-  background:white;
-  border-bottom:1px solid #e5edf1;
-  position:sticky;top:0;z-index:10;
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:21px;text-decoration:none;direction:ltr}
+.logo i{display:grid;place-items:center;width:32px;height:32px;border-radius:9px;background:var(--brand);color:#fff;font-style:normal;font-size:18px}
+.logo b{color:var(--brand)}
+nav.links{display:flex;gap:20px;align-items:center;font-size:15px}
+nav.links a{text-decoration:none;color:var(--ink2)}
+nav.links a:hover{color:var(--brand)}
+.lang{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 10px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--brand);color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:10px;border:0;font:inherit;font-weight:700;cursor:pointer;transition:background .15s}
+.btn:hover{background:#0b5f59}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--soft)}
+.btn.sm{padding:8px 14px;font-size:14px}
+
+/* hero */
+.hero{padding:56px 0 40px;background:linear-gradient(180deg,#eef7f6 0%,#fff 100%)}
+.hero-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;align-items:center}
+.pill{display:inline-block;background:#d7f2ee;color:var(--brandInk);font-size:13px;font-weight:700;padding:4px 12px;border-radius:99px}
+h1{font-size:44px;line-height:1.25;margin:14px 0 12px;letter-spacing:-.5px}
+.lead{font-size:18px;color:var(--ink2);margin:0 0 22px}
+.cta{display:flex;flex-wrap:wrap;gap:10px}
+.ticks{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:6px;color:var(--ink2);font-size:15px}
+.ticks li::before{content:"✓";color:var(--brand);font-weight:700;margin-inline-end:8px}
+.shot{border-radius:14px;border:1px solid var(--line);box-shadow:0 18px 50px rgba(15,42,63,.14);background:#fff;overflow:hidden}
+.shot img{width:100%;height:auto}
+
+/* sections */
+section{padding:64px 0}
+section.alt{background:var(--soft)}
+.head{text-align:center;max-width:680px;margin:0 auto 34px}
+.head h2{font-size:32px;line-height:1.3;margin:0 0 8px}
+.head p{color:var(--muted);margin:0}
+
+/* specialties */
+.specs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.spec{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.spec h3{margin:0 0 4px;font-size:19px;display:flex;align-items:center;gap:8px}
+.spec h3 span.e{font-size:24px}
+.spec ul{margin:8px 0 0;padding-inline-start:18px;color:var(--ink2);font-size:15px}
+.spec li{margin:3px 0}
+.spec.all{background:var(--ink);color:#fff;border-color:var(--ink)}
+.spec.all ul{color:#cfe0ea}
+
+/* screens */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g{margin:0;background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;cursor:zoom-in}
+.g img{aspect-ratio:16/10;object-fit:cover;object-position:top;width:100%;border-bottom:1px solid var(--line)}
+.g figcaption{padding:12px 14px;font-size:15px}
+.g figcaption b{display:block}
+.g figcaption small{color:var(--muted);font-size:13.5px}
+.lightbox{position:fixed;inset:0;background:rgba(8,20,30,.88);display:none;align-items:center;justify-content:center;padding:16px;z-index:50;cursor:zoom-out}
+.lightbox.on{display:flex}
+.lightbox img{max-height:92vh;width:auto;border-radius:10px;background:#fff}
+
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.t{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.t .e{font-size:26px}
+.t h3{margin:6px 0 4px;font-size:17px}
+.t p{margin:0;color:var(--muted);font-size:14.5px}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px;position:relative}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;margin-bottom:8px}
+.step h3{margin:0 0 4px;font-size:17px}
+.step p{margin:0;color:var(--muted);font-size:14.5px}
+
+/* form */
+.formcard{max-width:720px;margin:0 auto;background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px;box-shadow:0 10px 30px rgba(15,42,63,.06)}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.f{display:flex;flex-direction:column;gap:5px;font-size:14.5px;font-weight:500}
+.f.full{grid-column:1/-1}
+.f input,.f select,.f textarea{font:inherit;font-weight:400;padding:11px 12px;border:1px solid #c9d6df;border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.f input:focus,.f select:focus,.f textarea:focus{outline:2px solid var(--brand2);outline-offset:0;border-color:var(--brand2)}
+.req{color:#c2410c}
+.agree{display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--ink2);margin:14px 0}
+.agree input{margin-top:5px}
+.err{color:#b91c1c;font-size:14px;min-height:20px}
+.note{background:var(--warn);color:var(--warnInk);border-radius:10px;padding:12px 14px;font-size:14px;margin-top:14px}
+#done{display:none;text-align:center}
+#done h3{font-size:24px;margin:6px 0}
+.dl{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:16px 0}
+.small{font-size:13.5px;color:var(--muted)}
+
+/* faq */
+.faq{max-width:760px;margin:0 auto}
+details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:700}
+details p{margin:8px 0 0;color:var(--ink2)}
+
+footer{background:var(--ink);color:#cfe0ea;padding:30px 0;font-size:14px;text-align:center}
+footer b{color:#fff}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  h1{font-size:34px}
+  .gallery{grid-template-columns:1fr 1fr}
+  .trust{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+  nav.links a.hide-m{display:none}
 }
-nav {
-  min-height:75px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
-}
-.logo {
-  font-size:25px;
-  font-weight:bold;
-  color:var(--navy);
-}
-.logo span {color:var(--teal)}
-.navlinks {display:flex;gap:25px;align-items:center}
-.navlinks a:hover {color:var(--teal)}
-.btn {
-  display:inline-block;
-  background:var(--teal);
-  color:#073b40;
-  padding:13px 23px;
-  border-radius:9px;
-  font-weight:bold;
-  border:0;
-  cursor:pointer;
-}
-.btn:hover {background:#38c8b4}
-.btn-outline {
-  background:transparent;
-  color:white;
-  border:1px solid #ffffff88;
-}
-.hero {
-  background:linear-gradient(120deg,#102b46,#176b87);
-  color:white;
-  padding:95px 0;
-}
-.hero-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:45px;
-  align-items:center;
-}
-.hero h1 {
-  font-size:50px;
-  line-height:1.15;
-  margin:15px 0;
-}
-.hero p {
-  font-size:18px;
-  line-height:1.8;
-  color:#dceaf0;
-}
-.hero-image {
-  background:#fff;
-  color:var(--navy);
-  border-radius:18px;
-  padding:18px;
-  box-shadow:0 15px 45px #071b2c66;
-}
-.mock-header {
-  background:var(--navy);
-  color:white;
-  padding:15px;
-  border-radius:8px;
-  font-weight:bold;
-}
-.mock-content {
-  background:#f2f7f9;
-  padding:20px;
-  margin-top:12px;
-  border-radius:8px;
-}
-.mock-stats {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:10px;
-}
-.mock-stat {
-  background:white;
-  padding:18px 8px;
-  border-radius:8px;
-  text-align:center;
-  font-size:13px;
-}
-.mock-stat strong {
-  display:block;
-  color:var(--blue);
-  font-size:18px;
-  margin-bottom:5px;
-}
-section {padding:75px 0}
-.section-title {
-  text-align:center;
-  margin-bottom:45px;
-}
-.section-title h2 {
-  font-size:34px;
-  color:var(--navy);
-  margin-bottom:12px;
-}
-.section-title p {color:var(--muted)}
-.features {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-}
-.feature {
-  border:1px solid #e1eaf0;
-  border-radius:14px;
-  padding:25px;
-  transition:.2s;
-}
-.feature:hover {
-  transform:translateY(-5px);
-  box-shadow:0 10px 30px #102b4612;
-}
-.feature .icon {font-size:35px}
-.feature h3 {color:var(--navy)}
-.feature p {color:var(--muted);line-height:1.7}
-.screens {background:var(--light)}
-.screen-grid {
-  display:grid;
-  grid-template-columns:1fr;
-  gap:32px;
-  width:100%;
-}
-.screen {
-  width:100%;
-  overflow:hidden;
-  background:#fff;
-  border:1px solid #e0e9ee;
-  border-radius:16px;
-  box-shadow:0 3px 14px rgba(16,42,70,.07);
-  transition:transform .2s ease,box-shadow .2s ease;
-}
-.screen:hover {
-  transform:translateY(-4px);
-  box-shadow:0 12px 28px rgba(16,42,70,.12);
-}
-.screen a {
-  display:block;
-  cursor:zoom-in;
-  background:#f1f5f9;
-}
-.screen img {
-  display:block;
-  width:100%;
-  height:auto;
-  max-width:100%;
-  padding:12px;
-  background:#f1f5f9;
-  transition:transform .25s ease;
-}
-.screen a:hover img {transform:scale(1.01)}
-.screen h3 {
-  margin:0;
-  padding:20px 24px 6px;
-  color:var(--navy);
-  font-size:22px;
-}
-.screen p {
-  margin:0;
-  padding:0 24px 22px;
-  color:var(--muted);
-  line-height:1.6;
-}
-@media(max-width:520px) {
-  .screen-grid {gap:22px}
-  .screen {border-radius:12px}
-  .screen img {padding:8px}
-  .screen h3 {padding:16px 18px 5px;font-size:20px}
-  .screen p {padding:0 18px 18px}
-}
-.download {
-  background:var(--navy);
-  color:white;
-  text-align:center;
-}
-.download h2 {font-size:35px}
-.download p {
-  color:#d5e5ed;
-  max-width:650px;
-  margin:15px auto 25px;
-  line-height:1.8;
-}
-.register {
-  background:var(--light);
-}
-.register-card {
-  max-width:650px;
-  margin:auto;
-  background:white;
-  padding:35px;
-  border-radius:16px;
-  text-align:center;
-  border:1px solid #e0e9ee;
-}
-.register-card p {
-  color:var(--muted);
-  line-height:1.8;
-}
-.notice {
-  background:#fff6df;
-  padding:15px;
-  border-radius:9px;
-  color:#725b26;
-  font-size:14px;
-}
-footer {
-  background:#0b2034;
-  color:white;
-  padding:30px 0;
-  text-align:center;
-}
-footer p {color:#b6c8d3;font-size:13px}
-.arabic {
-  direction:rtl;
-  font-family:Tahoma,Arial,sans-serif;
-}
-@media(max-width:800px) {
-  .hero-grid {grid-template-columns:1fr}
-  .features {grid-template-columns:repeat(2,1fr)}
-  .screen-grid {grid-template-columns:repeat(2,1fr)}
-  .hero h1 {font-size:38px}
-  .navlinks {gap:10px}
-}
-@media(max-width:520px) {
-  .navlinks a:not(.btn) {display:none}
-  .features,.screen-grid {grid-template-columns:1fr}
-  .hero {padding:60px 0}
-  .hero h1 {font-size:34px}
-  section {padding:55px 0}
+@media (max-width:560px){
+  .gallery,.trust,.fgrid{grid-template-columns:1fr}
+  .head h2{font-size:26px}
+  section{padding:48px 0}
+  .formcard{padding:20px}
+  nav.links{gap:10px}
 }
 </style>
 </head>
-
 <body>
 
 <header>
-<div class="container">
-<nav>
-  <a class="logo" href="#">✚ Doc<span>Clinic</span></a>
-  <div class="navlinks">
-    <a href="#features">Features</a>
-    <a href="#screens">Screenshots</a>
-    <a href="#download">Download</a>
-    <a href="#register" class="btn">Get Started</a>
+  <div class="wrap bar">
+    <a class="logo" href="#top"><i>✚</i>Doc<b>Clinic</b></a>
+    <nav class="links">
+      <a class="hide-m" href="#specialties"><span data-l="ar">التخصصات</span><span data-l="en">Specialties</span></a>
+      <a class="hide-m" href="#screens"><span data-l="ar">شوف البرنامج</span><span data-l="en">Screens</span></a>
+      <a class="hide-m" href="#faq"><span data-l="ar">أسئلة</span><span data-l="en">FAQ</span></a>
+      <button class="lang" id="lang" type="button">English</button>
+      <a class="btn sm" href="#register"><span data-l="ar">جرّب مجانًا</span><span data-l="en">Try it free</span></a>
+    </nav>
   </div>
-</nav>
-</div>
 </header>
 
-<main>
+<main id="top">
 
 <section class="hero">
-<div class="container hero-grid">
-
-<div>
-  <h1>Your Clinic.<br>Smarter Management.</h1>
-  <p>
-    DocClinic is a medical clinic management application
-    designed to help doctors organize patients, appointments,
-    clinical encounters, prescriptions and laboratory requests.
-  </p>
-  <a href="#register" class="btn">Get Free Trial</a>
-  <a href="#features" class="btn btn-outline">Explore Features</a>
-  <p class="arabic">
-    برنامج متكامل لمساعدة الأطباء في تنظيم وإدارة العيادة الطبية.
-  </p>
-</div>
-
-<div class="hero-image">
-  <div class="mock-header">✚ DocClinic Dashboard</div>
-  <div class="mock-content">
-    <h3>Clinic Overview</h3>
-    <div class="mock-stats">
-      <div class="mock-stat"><strong>Patients</strong>Records</div>
-      <div class="mock-stat"><strong>Visits</strong>Encounters</div>
-      <div class="mock-stat"><strong>Schedule</strong>Appointments</div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span data-l="ar">نسخة تجريبية مجانية</span><span data-l="en">Free trial version</span></span>
+      <h1>
+        <span data-l="ar">برنامج عيادتك.. بيشتغل من غير نت، وبيفهم تخصصك.</span>
+        <span data-l="en">Your clinic's program. Works offline, speaks your specialty.</span>
+      </h1>
+      <p class="lead">
+        <span data-l="ar">المرضى والمواعيد والكشف والروشتة والتحاليل والفواتير في مكان واحد، ومعاهم كارت مخصوص لتخصصك: خريطة الأسنان، جلسات الليزر، متابعة السكر، منحنيات النمو، والجلسات الطبيعية.</span>
+        <span data-l="en">Patients, appointments, visits, prescriptions, labs and billing in one place, plus a card made for your specialty: the dental chart, laser sessions, diabetes follow-up, growth charts, physiotherapy sessions.</span>
+      </p>
+      <div class="cta">
+        <a class="btn" href="#register"><span data-l="ar">سجّل ونزّل البرنامج</span><span data-l="en">Register and download</span></a>
+        <a class="btn ghost" href="#screens"><span data-l="ar">شوف الشاشات</span><span data-l="en">See the screens</span></a>
+      </div>
+      <ul class="ticks">
+        <li><span data-l="ar">بيشتغل على جهاز العيادة من غير إنترنت</span><span data-l="en">Runs on the clinic computer, no internet needed</span></li>
+        <li><span data-l="ar">بيانات المرضى مش بتخرج من جهازك</span><span data-l="en">Patient data never leaves your computer</span></li>
+        <li><span data-l="ar">حساب للسكرتيرة وحساب للدكتور</span><span data-l="en">A secretary account and a doctor account</span></li>
+      </ul>
     </div>
-    <br>
-    <h3>Clinic Workspace</h3>
-    <p>Patient Records</p>
-    <p>Clinical Encounters</p>
-    <p>Prescriptions & Laboratory</p>
+    <div class="shot"><img src="img/s1-today.png" alt="DocClinic Today screen" width="1440" height="900"></div>
   </div>
-  <p style="text-align:center;font-size:12px;color:#687d8c">
-    Illustrative preview – actual screenshots coming soon
-  </p>
-</div>
-
-</div>
 </section>
 
-<section id="features">
-<div class="container">
-
-<div class="section-title">
-  <h2>Powerful Clinic Features</h2>
-  <p>Everything organized in one medical workspace.</p>
-</div>
-
-<div class="features">
-
-<div class="feature">
-  <div class="icon">👨‍⚕️</div>
-  <h3>Patient Management</h3>
-  <p>Organize patient information and medical records.</p>
-</div>
-
-<div class="feature">
-  <div class="icon">📅</div>
-  <h3>Appointments</h3>
-  <p>Manage appointments and daily patient schedules.</p>
-</div>
-
-<div class="feature">
-  <div class="icon">🩺</div>
-  <h3>Clinical Encounters</h3>
-  <p>Record complaints, symptoms, examination and clinical notes.</p>
-</div>
-
-<div class="feature">
-  <div class="icon">💊</div>
-  <h3>Prescriptions</h3>
-  <p>Prepare and print prescriptions for your patients.</p>
-</div>
-
-<div class="feature">
-  <div class="icon">🧪</div>
-  <h3>Laboratory Requests</h3>
-  <p>Organize laboratory tests and requests.</p>
-</div>
-
-<div class="feature">
-  <div class="icon">🧠</div>
-  <h3>Diagnostic Support</h3>
-  <p>Structured clinical information to support the doctor's assessment.</p>
-</div>
-
-</div>
-</div>
-</section>
-
-<section class="screens" id="screens">
-<div class="container">
-
-<div class="section-title">
-  <h2>Explore DocClinic</h2>
-  <p>Take a look at the main application screens.</p>
-</div>
-
-<div class="screen-grid">
-
-  <article class="screen">
-    <a href="0001.png" target="_blank" rel="noopener" aria-label="Open Dashboard screenshot at full size">
-      <img src="0001.png" alt="DocClinic Dashboard">
-    </a>
-    <h3>Dashboard</h3>
-    <p>Clinic overview and patient queue.</p>
-  </article>
-
-  <article class="screen">
-    <a href="001_.png" target="_blank" rel="noopener" aria-label="Open Clinical Encounter screenshot at full size">
-      <img src="001_.png" alt="DocClinic Clinical Screen">
-    </a>
-    <h3>Clinical Encounter</h3>
-    <p>Clinical documentation and patient assessment.</p>
-  </article>
-
-  <article class="screen">
-    <a href="002_screen_002_FULL.png" target="_blank" rel="noopener" aria-label="Open Patient Management screenshot at full size">
-      <img src="002_screen_002_FULL.png" alt="DocClinic Patient List">
-    </a>
-    <h3>Patient Management</h3>
-    <p>Patient records and information management.</p>
-  </article>
-
-  <article class="screen">
-    <a href="003_screen_003_FULL.png" target="_blank" rel="noopener" aria-label="Open Patient Queue screenshot at full size">
-      <img src="003_screen_003_FULL.png" alt="DocClinic Patient Queue">
-    </a>
-    <h3>Patient Queue</h3>
-    <p>Organized patient workflow.</p>
-  </article>
-
-  <article class="screen">
-    <a href="005_screen_005_FULL.png" target="_blank" rel="noopener" aria-label="Open Medical Library screenshot at full size">
-      <img src="005_screen_005_FULL.png" alt="DocClinic Medical Library">
-    </a>
-    <h3>Medical Library</h3>
-    <p>Medical knowledge and clinical references.</p>
-  </article>
-
-  <article class="screen">
-    <a href="006_screen_006_FULL.png" target="_blank" rel="noopener" aria-label="Open Data Management screenshot at full size">
-      <img src="006_screen_006_FULL.png" alt="DocClinic Data Screen">
-    </a>
-    <h3>Data Management</h3>
-    <p>Structured clinic information.</p>
-  </article>
-
-  <article class="screen">
-    <a href="007_screen_007_FULL.png" target="_blank" rel="noopener" aria-label="Open Clinic Overview screenshot at full size">
-      <img src="007_screen_007_FULL.png" alt="DocClinic Analytics">
-    </a>
-    <h3>Clinic Overview</h3>
-    <p>Clinic statistics and performance information.</p>
-  </article>
-
-  <article class="screen">
-    <a href="008_screen_008_FULL.png" target="_blank" rel="noopener" aria-label="Open Clinical Documentation screenshot at full size">
-      <img src="008_screen_008_FULL.png" alt="DocClinic Clinical Documentation">
-    </a>
-    <h3>Clinical Documentation</h3>
-    <p>Detailed clinical workflow.</p>
-  </article>
-
-  <article class="screen">
-    <a href="009_screen_009_FULL.png" target="_blank" rel="noopener" aria-label="Open Medical Record screenshot at full size">
-      <img src="009_screen_009_FULL.png" alt="DocClinic Medical Record">
-    </a>
-    <h3>Medical Record</h3>
-    <p>Patient encounter details.</p>
-  </article>
-
-  <article class="screen">
-    <a href="010_screen_010_FULL.png" target="_blank" rel="noopener" aria-label="Open Clinical Workflow screenshot at full size">
-      <img src="010_screen_010_FULL.png" alt="DocClinic Clinical Workflow">
-    </a>
-    <h3>Clinical Workflow</h3>
-    <p>Integrated clinical documentation.</p>
-  </article>
-
-</div>
-</div>
-</section>
-
-<section class="download" id="download">
-<div class="container">
-  <h2>Try DocClinic Today</h2>
-  <p>
-    Interested in improving your clinic workflow?
-    Register your interest to receive information about
-    the DocClinic trial version.
-  </p>
-  <a href="#register" class="btn">Request Free Trial</a>
-</div>
-</section>
-
-<section class="register" id="register">
-<div class="container">
-
-<div class="register-card">
-  <h2>Doctor Registration</h2>
-  <p>
-    Register your interest in DocClinic.
-    Our registration form and download link will be available soon.
-  </p>
-
-  <div class="notice">
-    <strong>Registration is being prepared.</strong><br>
-    The official Google Form and verified application download
-    link will be connected here.
+<section id="specialties">
+  <div class="wrap">
+    <div class="head">
+      <h2><span data-l="ar">اختار تخصصك</span><span data-l="en">Pick your specialty</span></h2>
+      <p><span data-l="ar">كل دكتور بياخد نسخة فيها تخصصه بس، من غير زحمة.</span><span data-l="en">Each doctor gets a copy with his own specialty only, nothing in the way.</span></p>
+    </div>
+    <div class="specs">
+      <div class="spec"><h3><span class="e">🦷</span><span data-l="ar">أسنان</span><span data-l="en">Dentistry</span></h3>
+        <ul data-l="ar"><li>خريطة الأسنان وخطة علاج بمراحل وعرض سعر</li><li>حشو العصب على جلسات وشغل المعمل</li><li>روشتات جاهزة بضغطة، وإقرارات، وتقسيط</li></ul>
+        <ul data-l="en"><li>Tooth chart, phased plan and printed quote</li><li>Multi-visit root canals and lab work</li><li>One-click prescriptions, consents, installments</li></ul></div>
+      <div class="spec"><h3><span class="e">✨</span><span data-l="ar">جلدية</span><span data-l="en">Dermatology</span></h3>
+        <ul data-l="ar"><li>باكدج جلسات الليزر والضوئي ومتابعتها</li><li>صور قبل وبعد ومقاييس الشدة</li><li>متابعة الإيزوتريتينوين والأدوية القوية</li></ul>
+        <ul data-l="en"><li>Laser and phototherapy session packages</li><li>Before/after photos and severity scores</li><li>Isotretinoin and systemic drug monitoring</li></ul></div>
+      <div class="spec"><h3><span class="e">🩺</span><span data-l="ar">باطنة</span><span data-l="en">Internal medicine</span></h3>
+        <ul data-l="ar"><li>ضغط وسكر وقلب وكلى في متابعة واحدة</li><li>جرعات الأدوية بتتظبط على وظائف الكلى</li><li>تنبيه للتداخلات والقراءات الخطرة</li></ul>
+        <ul data-l="en"><li>Blood pressure, diabetes, heart and kidney follow-up</li><li>Doses adjusted to kidney function</li><li>Alerts for interactions and dangerous readings</li></ul></div>
+      <div class="spec"><h3><span class="e">🩸</span><span data-l="ar">غدد وسكر</span><span data-l="en">Endocrinology</span></h3>
+        <ul data-l="ar"><li>السكر التراكمي والأنسولين وضبط الجرعة</li><li>الغدة الدرقية وجرعتها حسب التحاليل</li><li>متابعة الهشاشة والسمنة وتكيس المبايض</li></ul>
+        <ul data-l="en"><li>HbA1c, insulin start and titration</li><li>Thyroid dose guided by results</li><li>Osteoporosis, obesity and PCOS follow-up</li></ul></div>
+      <div class="spec"><h3><span class="e">👶</span><span data-l="ar">أطفال</span><span data-l="en">Pediatrics</span></h3>
+        <ul data-l="ar"><li>منحنيات النمو والوزن</li><li>جدول التطعيمات</li><li>جرعات بالوزن</li></ul>
+        <ul data-l="en"><li>Growth and weight charts</li><li>Vaccination schedule</li><li>Weight-based doses</li></ul></div>
+      <div class="spec"><h3><span class="e">🤰</span><span data-l="ar">نسا وتوليد</span><span data-l="en">OB-GYN</span></h3>
+        <ul data-l="ar"><li>متابعة الحمل بالأسبوع وميعاد الولادة</li><li>ضغط الحمل وسكر الحمل</li><li>تحاليل وسونار كل مرحلة</li></ul>
+        <ul data-l="en"><li>Pregnancy by week and due date</li><li>Pregnancy blood pressure and diabetes</li><li>Labs and scans for each stage</li></ul></div>
+      <div class="spec"><h3><span class="e">🦵</span><span data-l="ar">علاج طبيعي</span><span data-l="en">Physiotherapy</span></h3>
+        <ul data-l="ar"><li>تقييم مدى الحركة وقوة العضلات والمقاييس</li><li>باكدج جلسات أو بالجلسة</li><li>برامج بعد العمليات وتمارين البيت</li></ul>
+        <ul data-l="en"><li>Range of motion, muscle strength and scores</li><li>Session packages or pay per session</li><li>Post-op protocols and home exercises</li></ul></div>
+      <div class="spec all"><h3><span class="e">🏥</span><span data-l="ar">في كل النسخ</span><span data-l="en">In every copy</span></h3>
+        <ul data-l="ar"><li>طابور ومواعيد وتذكير واتساب</li><li>روشتة وتحاليل مطبوعة باسم عيادتك</li><li>فواتير ودخل ومساعد للتشخيص</li></ul>
+        <ul data-l="en"><li>Queue, appointments, WhatsApp reminders</li><li>Prescriptions and lab requests printed with your clinic's name</li><li>Billing, income and a diagnosis assistant</li></ul></div>
+    </div>
   </div>
+</section>
 
-  <p class="arabic">
-    قريباً يمكنك تسجيل بياناتك والحصول على النسخة التجريبية من البرنامج.
-  </p>
-</div>
+<section class="alt" id="screens">
+  <div class="wrap">
+    <div class="head">
+      <h2><span data-l="ar">شوف البرنامج</span><span data-l="en">See the program</span></h2>
+      <p><span data-l="ar">صور حقيقية من النسخة 1.4.30 على مرضى تجريبيين. دوس على أي صورة تكبر.</span><span data-l="en">Real screens from version 1.4.30 with demo patients. Click any picture to enlarge.</span></p>
+    </div>
+    <div class="gallery">
+      <figure class="g"><img src="img/s1-today.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">شاشة النهارده</span><span data-l="en">Today</span></b><small><span data-l="ar">الطابور ومين مستني والنتايج اللي وصلت</span><span data-l="en">The queue, who is waiting, results that arrived</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s2-visit.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">الكشف</span><span data-l="en">The visit</span></b><small><span data-l="ar">الشكوى والفحص والتشخيص والروشتة في شاشة واحدة</span><span data-l="en">Complaint, exam, diagnosis and prescription on one screen</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s3-dental.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">كارت الأسنان</span><span data-l="en">Dental card</span></b><small><span data-l="ar">خريطة الأسنان وخطة العلاج والتقسيط</span><span data-l="en">Tooth chart, treatment plan, installments</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s4-physio.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">كارت العلاج الطبيعي</span><span data-l="en">Physiotherapy card</span></b><small><span data-l="ar">التقييم والجلسات والتمارين</span><span data-l="en">Assessment, sessions, exercises</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s5-file.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">ملف المريض</span><span data-l="en">Patient file</span></b><small><span data-l="ar">كل الزيارات والتحاليل والأدوية</span><span data-l="en">Every visit, result and medicine</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s6-income.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">الدخل</span><span data-l="en">Income</span></b><small><span data-l="ar">الفواتير والمدفوع والباقي</span><span data-l="en">Invoices, paid and due</span></small></figcaption></figure>
+    </div>
+  </div>
+</section>
 
-</div>
+<section>
+  <div class="wrap">
+    <div class="head"><h2><span data-l="ar">ليه تطمن؟</span><span data-l="en">Why you can rely on it</span></h2></div>
+    <div class="trust">
+      <div class="t"><div class="e">📴</div><h3><span data-l="ar">من غير نت</span><span data-l="en">Offline</span></h3><p><span data-l="ar">النت يقطع؟ العيادة شغالة عادي.</span><span data-l="en">Internet down? The clinic keeps working.</span></p></div>
+      <div class="t"><div class="e">🔒</div><h3><span data-l="ar">بياناتك عندك</span><span data-l="en">Your data stays with you</span></h3><p><span data-l="ar">بيانات المرضى على جهاز العيادة بس، محدش بيشوفها غيرك.</span><span data-l="en">Patient data stays on the clinic computer; nobody else sees it.</span></p></div>
+      <div class="t"><div class="e">💾</div><h3><span data-l="ar">نسخة احتياطية لوحدها</span><span data-l="en">Automatic backup</span></h3><p><span data-l="ar">كل يوم على فلاشة أو هارد أو Google Drive.</span><span data-l="en">Every day to a USB drive, a disk or Google Drive.</span></p></div>
+      <div class="t"><div class="e">⚠️</div><h3><span data-l="ar">بينبّهك</span><span data-l="en">It warns you</span></h3><p><span data-l="ar">حساسية، تداخل أدوية، حمل، دوا سيولة قبل الخلع.</span><span data-l="en">Allergies, interactions, pregnancy, blood thinners before an extraction.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="head"><h2><span data-l="ar">تبدأ إزاي؟</span><span data-l="en">How to start</span></h2></div>
+    <div class="steps">
+      <div class="step"><h3><span data-l="ar">سجّل بياناتك</span><span data-l="en">Register</span></h3><p><span data-l="ar">دقيقة واحدة في الفورم تحت.</span><span data-l="en">One minute in the form below.</span></p></div>
+      <div class="step"><h3><span data-l="ar">نزّل نسخة تخصصك</span><span data-l="en">Download your copy</span></h3><p><span data-l="ar">فكّ الضغط ودوس على البرنامج، من غير تسطيب.</span><span data-l="en">Unzip and open it, nothing to install.</span></p></div>
+      <div class="step"><h3><span data-l="ar">جرّب على مرضى وهميين</span><span data-l="en">Try it on demo patients</span></h3><p><span data-l="ar">حالات جاهزة لتخصصك، وبعدها ابدأ بمرضاك.</span><span data-l="en">Ready cases for your specialty, then start with your patients.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="register">
+  <div class="wrap">
+    <div class="head">
+      <h2><span data-l="ar">سجّل ونزّل النسخة التجريبية</span><span data-l="en">Register and download the trial</span></h2>
+      <p><span data-l="ar">بعد ما تبعت بياناتك، زرار التحميل بيظهر على طول.</span><span data-l="en">After you send your details, the download appears right away.</span></p>
+    </div>
+    <div class="formcard">
+      <form id="reg" novalidate>
+        <div class="fgrid">
+          <label class="f"><span><span data-l="ar">الاسم</span><span data-l="en">Name</span> <span class="req">*</span></span><input name="name" required autocomplete="name" placeholder="د. ..."></label>
+          <label class="f"><span><span data-l="ar">التخصص</span><span data-l="en">Specialty</span> <span class="req">*</span></span>
+            <select name="specialty" required>
+              <option value=""></option>
+              <option value="dental">أسنان · Dentistry</option>
+              <option value="derm">جلدية · Dermatology</option>
+              <option value="internal">باطنة · Internal medicine</option>
+              <option value="endo">غدد وسكر · Endocrinology</option>
+              <option value="peds">أطفال · Pediatrics</option>
+              <option value="obgyn">نسا وتوليد · OB-GYN</option>
+              <option value="physio">علاج طبيعي · Physiotherapy</option>
+              <option value="all">أكتر من تخصص · Several</option>
+            </select></label>
+          <label class="f"><span><span data-l="ar">الموبايل / واتساب</span><span data-l="en">Mobile / WhatsApp</span> <span class="req">*</span></span><input name="phone" required inputmode="tel" autocomplete="tel" dir="ltr" placeholder="01xxxxxxxxx"></label>
+          <label class="f"><span><span data-l="ar">الإيميل</span><span data-l="en">Email</span></span><input name="email" type="email" autocomplete="email" dir="ltr" placeholder="name@example.com"></label>
+          <label class="f"><span><span data-l="ar">المحافظة / المدينة</span><span data-l="en">City</span></span><input name="city" autocomplete="address-level2"></label>
+          <label class="f"><span><span data-l="ar">عدد المرضى في اليوم تقريبًا</span><span data-l="en">Patients per day (about)</span></span>
+            <select name="patients"><option value=""></option><option>&lt; 10</option><option>10-20</option><option>20-40</option><option>&gt; 40</option></select></label>
+          <label class="f full"><span><span data-l="ar">بتستخدم إيه دلوقتي؟</span><span data-l="en">What do you use now?</span></span>
+            <select name="current"><option value=""></option><option value="paper">ورق · Paper</option><option value="other program">برنامج تاني · Another program</option><option value="nothing">ولا حاجة · Nothing</option></select></label>
+        </div>
+        <label class="agree"><input type="checkbox" name="agree" required>
+          <span><span data-l="ar">فاهم إن دي نسخة تجريبية، وإن المحتوى الطبي فيها مساعد والقرار الطبي مسؤوليتي.</span><span data-l="en">I understand this is a trial version, its medical content only assists, and medical decisions are my responsibility.</span></span></label>
+        <div class="err" id="err" role="alert"></div>
+        <button class="btn" type="submit" id="send" style="width:100%"><span data-l="ar">ابعت ونزّل البرنامج</span><span data-l="en">Send and download</span></button>
+        <p class="small" style="text-align:center;margin:10px 0 0"><span data-l="ar">بياناتك بتوصل لفريق DocClinic بس، عشان نتواصل معاك ونسمع رأيك.</span><span data-l="en">Your details go to the DocClinic team only, to keep in touch and hear your opinion.</span></p>
+      </form>
+      <div id="done">
+        <div style="font-size:40px">✅</div>
+        <h3><span data-l="ar">شكرًا! نزّل نسختك</span><span data-l="en">Thank you! Download your copy</span></h3>
+        <div class="dl" id="dl"></div>
+        <p class="small"><span data-l="ar">ويندوز 10 أو 11 · فكّ الضغط، وافتح فولدر DocClinic، ودوس دبل كليك على DocClinic.exe · الدخول أول مرة: admin / admin123</span><span data-l="en">Windows 10 or 11 · Unzip, open the DocClinic folder and double-click DocClinic.exe · First sign-in: admin / admin123</span></p>
+        <p class="small"><a href="DOCTOR_TRIAL_AR.pdf" target="_blank" rel="noopener"><span data-l="ar">ورقة الدكتور: تبدأ إزاي وتجرّب إيه (PDF)</span><span data-l="en">Doctor's sheet: how to start (PDF, Arabic)</span></a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="faq">
+  <div class="wrap faq">
+    <div class="head"><h2><span data-l="ar">أسئلة بتتكرر</span><span data-l="en">Questions</span></h2></div>
+    <details><summary><span data-l="ar">محتاج إنترنت؟</span><span data-l="en">Do I need internet?</span></summary><p><span data-l="ar">لأ. محتاج نت مرة واحدة بس عشان تنزّل البرنامج. بعد كده كله على جهازك.</span><span data-l="en">No. Only to download it once; after that everything is on your computer.</span></p></details>
+    <details><summary><span data-l="ar">بيشتغل على أنهي جهاز؟</span><span data-l="en">Which computer?</span></summary><p><span data-l="ar">أي جهاز ويندوز 10 أو 11. والسكرتيرة ممكن تشتغل من جهاز تاني على نفس شبكة العيادة.</span><span data-l="en">Any Windows 10 or 11 PC. The secretary can work from another computer on the clinic network.</span></p></details>
+    <details><summary><span data-l="ar">بيانات المرضى بتروح فين؟</span><span data-l="en">Where does patient data go?</span></summary><p><span data-l="ar">بتفضل على جهاز العيادة بس. إحنا مش بنشوفها. وتقدر تعمل نسخة احتياطية أوتوماتيك على فلاشة أو هارد أو Google Drive.</span><span data-l="en">It stays on the clinic computer; we never see it. Automatic backups can go to a USB drive, a disk or Google Drive.</span></p></details>
+    <details><summary><span data-l="ar">لو عندي أكتر من تخصص؟</span><span data-l="en">More than one specialty?</span></summary><p><span data-l="ar">اختار "أكتر من تخصص" في الفورم، وهتلاقي نسخة فيها كل التخصصات وتختار منها اللي يخصك.</span><span data-l="en">Choose "Several" in the form to get the copy with every specialty, then tick yours.</span></p></details>
+    <details><summary><span data-l="ar">المحتوى الطبي مين راجعه؟</span><span data-l="en">Who reviewed the medical content?</span></summary><p><span data-l="ar">دي نسخة تجريبية، والاقتراحات الطبية فيها لسه بتتراجع مع أطباء. هي مساعدة بس، والقرار الطبي قرارك إنت. رأيك في التجربة هو اللي بيحسّنها.</span><span data-l="en">This is a trial; its medical suggestions are still being reviewed with doctors. They only assist; the decision is yours. Your feedback is what improves it.</span></p></details>
+  </div>
 </section>
 
 </main>
 
 <footer>
-<div class="container">
-  <h2>✚ DocClinic</h2>
-  <p>Smart Clinic Management Software</p>
-  <p>
-    © <span id="year"></span> DocClinic. All rights reserved.
-  </p>
-  <p>
-    Clinical decisions remain the responsibility of the treating physician.
-  </p>
-</div>
+  <div class="wrap">
+    <p><b>✚ DocClinic</b></p>
+    <p><span data-l="ar">البرنامج أداة مساعدة، والقرار الطبي مسؤولية الطبيب المعالج.</span><span data-l="en">The program assists; clinical decisions remain the treating doctor's responsibility.</span></p>
+    <p>© <span id="year"></span> DocClinic</p>
+  </div>
 </footer>
 
-<script>
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-</script>
+<div class="lightbox" id="lb"><img alt=""></div>
 
+<script>
+/* ===== Settings: fill these once (see README.md) ===== */
+const CONFIG = {
+  // Google Form: the address that ends with /formResponse, and the entry number of each question
+  formAction: '',                       // e.g. https://docs.google.com/forms/d/e/XXXX/formResponse
+  entries: { name: '', specialty: '', phone: '', email: '', city: '', patients: '', current: '' },   // e.g. 'entry.123456789'
+  // The downloads: one zip per specialty in the GitHub release
+  version: '1.4.30',
+  downloadBase: 'https://github.com/shelmasry-assistent/docclinic-website/releases/download/v1.4.30/',
+  file: s => 'DocClinic_1.4.30_' + s + '_windows.zip'
+};
+const SPEC_NAMES = { dental: ['أسنان', 'Dentistry'], derm: ['جلدية', 'Dermatology'], internal: ['باطنة', 'Internal medicine'], endo: ['غدد وسكر', 'Endocrinology'],
+  peds: ['أطفال', 'Pediatrics'], obgyn: ['نسا وتوليد', 'OB-GYN'], physio: ['علاج طبيعي', 'Physiotherapy'], all: ['كل التخصصات', 'All specialties'] };
+
+/* language */
+function setLang(l) {
+  document.documentElement.lang = l; document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('lang').textContent = l === 'ar' ? 'English' : 'عربي';
+  document.title = l === 'ar' ? 'DocClinic | برنامج عيادتك' : 'DocClinic | Your clinic program';
+  try { localStorage.setItem('dc_lang', l); } catch (e) {}
+}
+document.getElementById('lang').addEventListener('click', () => setLang(document.documentElement.lang === 'ar' ? 'en' : 'ar'));
+try { const l = localStorage.getItem('dc_lang'); if (l === 'en') setLang('en'); } catch (e) {}
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* pictures: click to enlarge */
+const lb = document.getElementById('lb');
+document.querySelectorAll('.g img, .shot img').forEach(i => i.addEventListener('click', () => { lb.querySelector('img').src = i.src; lb.classList.add('on'); }));
+lb.addEventListener('click', () => lb.classList.remove('on'));
+document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('on'); });
+
+/* the form */
+const form = document.getElementById('reg'), err = document.getElementById('err');
+const ar = () => document.documentElement.lang === 'ar';
+function showDownloads(spec) {
+  const list = spec === 'all' ? ['all'] : [spec, 'all'];
+  document.getElementById('dl').innerHTML = list.map((s, i) =>
+    '<a class="btn' + (i ? ' ghost' : '') + '" href="' + CONFIG.downloadBase + CONFIG.file(s) + '">⬇ ' +
+    '<span data-l="ar">نسخة ' + SPEC_NAMES[s][0] + '</span><span data-l="en">' + SPEC_NAMES[s][1] + ' copy</span></a>').join('');
+  form.style.display = 'none'; document.getElementById('done').style.display = 'block';
+  document.getElementById('register').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+form.addEventListener('submit', async ev => {
+  ev.preventDefault(); err.textContent = '';
+  const d = Object.fromEntries(new FormData(form).entries());
+  const phone = (d.phone || '').replace(/[\s\-]/g, '');
+  if (!d.name || !d.name.trim()) return err.textContent = ar() ? 'اكتب اسمك' : 'Please write your name';
+  if (!d.specialty) return err.textContent = ar() ? 'اختار تخصصك' : 'Please choose your specialty';
+  if (!/^\+?\d{8,15}$/.test(phone)) return err.textContent = ar() ? 'اكتب رقم موبايل صحيح' : 'Please write a valid mobile number';
+  if (d.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return err.textContent = ar() ? 'الإيميل مش مظبوط' : 'The email looks wrong';
+  if (!d.agree) return err.textContent = ar() ? 'علّم على الموافقة' : 'Please tick the agreement';
+  const btn = document.getElementById('send'); btn.disabled = true;
+  if (CONFIG.formAction) {
+    const body = new URLSearchParams();
+    Object.entries(CONFIG.entries).forEach(([k, id]) => { if (id) body.append(id, k === 'phone' ? phone : (d[k] || '')); });
+    try { await fetch(CONFIG.formAction, { method: 'POST', mode: 'no-cors', body }); } catch (e) { /* the download is still given */ }
+  }
+  showDownloads(d.specialty);
+});
+</script>
 </body>
 </html>
-
-
