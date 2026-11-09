@@ -34,6 +34,7 @@ header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdro
 nav.links{display:flex;gap:20px;align-items:center;font-size:15px}
 nav.links a{text-decoration:none;color:var(--ink2)}
 nav.links a:hover{color:var(--brand)}
+nav.links a.btn,nav.links a.btn:hover{color:#fff}
 .lang{border:1px solid var(--line);background:#fff;border-radius:8px;padding:5px 10px;font:inherit;font-size:14px;cursor:pointer;color:var(--ink2)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--brand);color:#fff;text-decoration:none;font-weight:700;padding:12px 22px;border-radius:10px;border:0;font:inherit;font-weight:700;cursor:pointer;transition:background .15s}
 .btn:hover{background:#0b5f59}
@@ -142,7 +143,7 @@ footer b{color:#fff}
 
 <header>
   <div class="wrap bar">
-    <a class="logo" href="#top"><i>✚</i>Doc<b>Clinic</b></a>
+    <a class="logo" href="#top"><i>✚</i><span>Doc<b>Clinic</b></span></a>
     <nav class="links">
       <a class="hide-m" href="#specialties"><span data-l="ar">التخصصات</span><span data-l="en">Specialties</span></a>
       <a class="hide-m" href="#screens"><span data-l="ar">شوف البرنامج</span><span data-l="en">Screens</span></a>
@@ -177,7 +178,7 @@ footer b{color:#fff}
         <li><span data-l="ar">حساب للسكرتيرة وحساب للدكتور</span><span data-l="en">A secretary account and a doctor account</span></li>
       </ul>
     </div>
-    <div class="shot"><img src="img/s1-today.png" alt="DocClinic Today screen" width="1440" height="900"></div>
+    <div class="shot"><img src="img/s1-today.webp" alt="DocClinic Today screen" width="1440" height="900"></div>
   </div>
 </section>
 
@@ -223,12 +224,12 @@ footer b{color:#fff}
       <p><span data-l="ar">صور حقيقية من النسخة 1.4.30 على مرضى تجريبيين. دوس على أي صورة تكبر.</span><span data-l="en">Real screens from version 1.4.30 with demo patients. Click any picture to enlarge.</span></p>
     </div>
     <div class="gallery">
-      <figure class="g"><img src="img/s1-today.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">شاشة النهارده</span><span data-l="en">Today</span></b><small><span data-l="ar">الطابور ومين مستني والنتايج اللي وصلت</span><span data-l="en">The queue, who is waiting, results that arrived</span></small></figcaption></figure>
-      <figure class="g"><img src="img/s2-visit.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">الكشف</span><span data-l="en">The visit</span></b><small><span data-l="ar">الشكوى والفحص والتشخيص والروشتة في شاشة واحدة</span><span data-l="en">Complaint, exam, diagnosis and prescription on one screen</span></small></figcaption></figure>
-      <figure class="g"><img src="img/s3-dental.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">كارت الأسنان</span><span data-l="en">Dental card</span></b><small><span data-l="ar">خريطة الأسنان وخطة العلاج والتقسيط</span><span data-l="en">Tooth chart, treatment plan, installments</span></small></figcaption></figure>
-      <figure class="g"><img src="img/s4-physio.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">كارت العلاج الطبيعي</span><span data-l="en">Physiotherapy card</span></b><small><span data-l="ar">التقييم والجلسات والتمارين</span><span data-l="en">Assessment, sessions, exercises</span></small></figcaption></figure>
-      <figure class="g"><img src="img/s5-file.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">ملف المريض</span><span data-l="en">Patient file</span></b><small><span data-l="ar">كل الزيارات والتحاليل والأدوية</span><span data-l="en">Every visit, result and medicine</span></small></figcaption></figure>
-      <figure class="g"><img src="img/s6-income.png" alt="" loading="lazy"><figcaption><b><span data-l="ar">الدخل</span><span data-l="en">Income</span></b><small><span data-l="ar">الفواتير والمدفوع والباقي</span><span data-l="en">Invoices, paid and due</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s1-today.webp" alt="" loading="lazy"><figcaption><b><span data-l="ar">شاشة النهارده</span><span data-l="en">Today</span></b><small><span data-l="ar">الطابور ومين مستني والنتايج اللي وصلت</span><span data-l="en">The queue, who is waiting, results that arrived</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s2-visit.webp" alt="" loading="lazy"><figcaption><b><span data-l="ar">الكشف</span><span data-l="en">The visit</span></b><small><span data-l="ar">الشكوى والفحص والتشخيص والروشتة في شاشة واحدة</span><span data-l="en">Complaint, exam, diagnosis and prescription on one screen</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s3-dental.webp" alt="" loading="lazy"><figcaption><b><span data-l="ar">كارت الأسنان</span><span data-l="en">Dental card</span></b><small><span data-l="ar">خريطة الأسنان وخطة العلاج والتقسيط</span><span data-l="en">Tooth chart, treatment plan, installments</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s4-physio.webp" alt="" loading="lazy"><figcaption><b><span data-l="ar">كارت العلاج الطبيعي</span><span data-l="en">Physiotherapy card</span></b><small><span data-l="ar">التقييم والجلسات والتمارين</span><span data-l="en">Assessment, sessions, exercises</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s5-file.webp" alt="" loading="lazy"><figcaption><b><span data-l="ar">ملف المريض</span><span data-l="en">Patient file</span></b><small><span data-l="ar">كل الزيارات والتحاليل والأدوية</span><span data-l="en">Every visit, result and medicine</span></small></figcaption></figure>
+      <figure class="g"><img src="img/s6-income.webp" alt="" loading="lazy"><figcaption><b><span data-l="ar">الدخل</span><span data-l="en">Income</span></b><small><span data-l="ar">الفواتير والمدفوع والباقي</span><span data-l="en">Invoices, paid and due</span></small></figcaption></figure>
     </div>
   </div>
 </section>
