@@ -287,6 +287,7 @@ footer b{color:#fff}
           <label class="f full"><span><span data-l="ar">بتستخدم إيه دلوقتي؟</span><span data-l="en">What do you use now?</span></span>
             <select name="current"><option value=""></option><option value="paper">ورق · Paper</option><option value="other program">برنامج تاني · Another program</option><option value="nothing">ولا حاجة · Nothing</option></select></label>
         </div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <label class="agree"><input type="checkbox" name="agree" required>
           <span><span data-l="ar">فاهم إن دي نسخة تجريبية، وإن المحتوى الطبي فيها مساعد والقرار الطبي مسؤوليتي.</span><span data-l="en">I understand this is a trial version, its medical content only assists, and medical decisions are my responsibility.</span></span></label>
         <div class="err" id="err" role="alert"></div>
@@ -330,9 +331,8 @@ footer b{color:#fff}
 <script>
 /* ===== Settings: fill these once (see README.md) ===== */
 const CONFIG = {
-  // Google Form: the address that ends with /formResponse, and the entry number of each question
-  formAction: '',                       // e.g. https://docs.google.com/forms/d/e/XXXX/formResponse
-  entries: { name: '', specialty: '', phone: '', email: '', city: '', patients: '', current: '' },   // e.g. 'entry.123456789'
+  // The Google Sheet that keeps the registrations: the "Web app URL" of google-sheet/register.gs (ends with /exec)
+  sheetUrl: '',
   // The downloads: one zip per specialty in the GitHub release
   version: '1.4.30',
   downloadBase: 'https://github.com/shelmasry-assistent/docclinic-website/releases/download/v1.4.30/',
@@ -379,10 +379,11 @@ form.addEventListener('submit', async ev => {
   if (d.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email)) return err.textContent = ar() ? 'الإيميل مش مظبوط' : 'The email looks wrong';
   if (!d.agree) return err.textContent = ar() ? 'علّم على الموافقة' : 'Please tick the agreement';
   const btn = document.getElementById('send'); btn.disabled = true;
-  if (CONFIG.formAction) {
-    const body = new URLSearchParams();
-    Object.entries(CONFIG.entries).forEach(([k, id]) => { if (id) body.append(id, k === 'phone' ? phone : (d[k] || '')); });
-    try { await fetch(CONFIG.formAction, { method: 'POST', mode: 'no-cors', body }); } catch (e) { /* the download is still given */ }
+  if (CONFIG.sheetUrl) {
+    const rec = { name: d.name.trim(), specialty: d.specialty, phone, email: d.email || '', city: d.city || '', patients: d.patients || '',
+                  current: d.current || '', lang: document.documentElement.lang, website: d.website || '' };
+    try { await fetch(CONFIG.sheetUrl, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(rec) }); }
+    catch (e) { /* the download is still given */ }
   }
   showDownloads(d.specialty);
 });
