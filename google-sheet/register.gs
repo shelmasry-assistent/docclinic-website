@@ -38,7 +38,8 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
-    sheet_().appendRow([new Date()].concat(FIELDS.map(f => clean(d[f]))));
+    // every answer as text: a leading ' stops Sheets from turning 01012345678 into a number or 10-20 into a date
+    sheet_().appendRow([new Date()].concat(FIELDS.map(f => { const v = clean(d[f]); return v ? "'" + v : ''; })));
   } finally {
     lock.releaseLock();
   }
