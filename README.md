@@ -1,22 +1,29 @@
-# DocClinic website
+# حجز أونلاين لكل الأطباء - شيت واحد وسكريبت واحد
 
-One page (`index.html`), Arabic first with an English button. Hosted by GitHub Pages.
+البرنامج عند الدكاترة **من غير أي تعديل** (نفس 1.4.32): كل دكتور يكتب في الإعدادات الرابط والمفتاح بتوعه.
 
-* `img/` — screenshots of DocClinic 1.4.30 (demo patients only) and the icon.
-* `DOCTOR_TRIAL_AR.pdf` — the doctor's sheet (copied from the program's `docs/`).
-* The registration form writes to a **Google Sheet** (see below); after sending, the page shows the download of the doctor's specialty.
-* The downloads are the files of the GitHub release `v1.4.30`: `DocClinic_1.4.30_<specialty>_windows.zip`
-  (specialty = dental, derm, internal, endo, peds, obgyn, physio, all). Each is the **DocClinic** folder built on Windows
-  (`build_exe\Build_DocClinic_Nuitka.bat` inside the copy made by `Make_Release.bat`), zipped.
+## التركيب (مرة واحدة، إنت)
+1. اعمل Google Sheet جديد (من حساب Google مخصص للمشروع)، وبعدين Extensions ثم Apps Script.
+2. امسح الكود الموجود والصق `Code.gs` من الفولدر ده.
+3. شغّل `setup` مرة (هتطلب صلاحيات). هيعمل تبويب `Clinics`.
+4. شغّل `installTriggers` مرة: بتمسح كل يوم الساعة 3 الفجر المواعيد الفايتة والطلبات القديمة المتقررة.
+5. اضغط Deploy ثم New deployment ثم Web app: **Execute as: Me** و**Who has access: Anyone**. انسخ الرابط (ينتهي بـ `/exec`).
+6. افتح `booking.html` وحط الرابط في سطر `scriptUrl` (سطر واحد بس)، وارفع الصفحة على موقعك مرة واحدة.
 
-## Connect the Google Sheet (once)
+## إضافة دكتور (من غير تعديل كود ولا Deploy جديد)
+1. في تبويب `Clinics` اكتب صف جديد: **code** (حروف إنجليزي صغيرة وأرقام و- من 3 لـ 20، مثل `drali`) و**name** و**specialty** و**clinic**.
+2. شغّل `generateKeys`. هيعمل للدكتور **المفتاح** (عمود key) وتبويبين `S_drali` و`R_drali`.
+3. ادّي الدكتور حاجتين:
+   - **الرابط والمفتاح** للصقهم في البرنامج: Appointments ثم Online bookings ثم Settings.
+   - **رابط الحجز للمرضى:** `https://موقعك/booking.html?d=drali`
+4. الدكتور يضبط أيام وساعات شغله من نفس شاشة Settings، ويدوس Sync.
 
-The form sends each registration to a Google Sheet through a small Apps Script (`google-sheet/register.gs`):
-1. New Google Sheet → Extensions → Apps Script → paste `google-sheet/register.gs`, change `SECRET`.
-2. Deploy → New deployment → Web app → Execute as: Me, Who has access: Anyone → copy the URL (ends with `/exec`).
-3. Put it in `index.html`: `CONFIG.sheetUrl`.
-4. Registrations: the sheet "Registrations", or as JSON at `<URL>?key=<SECRET>` (keep the key private: the list has phone numbers).
+## إيقاف دكتور
+اكتب `off` في عمود status. رابطه ومفتاحه يقفوا فوراً، ومواعيد الباقي مش بتتأثر.
 
-## A new version
-
-Build the 8 Windows zips, make a release `vX.Y.Z` with them, then change `version`, `downloadBase` and `file` in `CONFIG`.
+## مهم
+- **لا تشارك الشيت مع حد:** فيه مفاتيح كل الدكاترة. لو مفتاح اتسرب، امسحه من الخلية وشغّل `generateKeys` يعمل واحد جديد.
+- لو عدلت `Code.gs` بعد كده: Deploy ثم Manage deployments ثم Edit ثم New version.
+- الشيت فيه الاسم والموبايل والميعاد وجملة السبب بس. الطلبات المتقررة والمتسحوبة بتتمسح بعد 14 يوم (غيّر `PURGE_DAYS` في أول الكود لو عايز).
+- حد أقصى 200 طلب مفتوح لكل دكتور، عشان محدش يملّي الشيت بطلبات وهمية.
+- لو كنت جربت النسخة القديمة (دكتور واحد) على شيت تاني: استخدم شيت جديد للنسخة دي، لأن الجداول مختلفة.
