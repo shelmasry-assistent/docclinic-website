@@ -53,6 +53,7 @@
 <main>
   <h1 id="docName"></h1>
   <p class="sub" id="docSub"></p>
+  <div class="msg hidden" id="bad" role="alert"></div>
 
   <div id="pick">
     <h2>اختار اليوم</h2>
@@ -88,14 +89,10 @@
 </div>
 
 <script>
-/* ===== Per-doctor settings: edit these 4 lines only ===== */
-const CONFIG = {
-  scriptUrl: "https://script.google.com/macros/s/AKfycbxqERBI6IPe41k78f5xNGGfH2AdVqDn_n0rrXQCoiiKfmeZ5-O3MyB77Gzq_kdifW6bqA/exec",
-  doctorName: "د. اسم الدكتور",
-  specialty: "التخصص",
-  clinic: "اسم العيادة"
-};
-/* ======================================================== */
+/* ===== One line to edit: the Apps Script Web app URL (the same for every doctor) ===== */
+const CONFIG = { scriptUrl: "https://script.google.com/macros/s/AKfycbwC9w_oKayjpO3ERpZ7ZEc9SJPV3n9iFnoNzAf6_FEIWT3tDQ8Oel0tX-BT9QsK63PDmQ/exec" };
+/* ================================================================================== */
+const CLINIC = (new URLSearchParams(location.search).get("d") || "").trim().toLowerCase();   // booking.html?d=<doctor code>
 
 const $ = id => document.getElementById(id);
 const dayFmt = new Intl.DateTimeFormat("ar-EG-u-nu-latn", { weekday: "long" });
@@ -105,13 +102,28 @@ const ERR = {
   bad_name: "اكتب الاسم بالكامل (3 حروف على الأقل).",
   bad_phone: "رقم الموبايل لازم يبدأ بـ 01 ويكون 11 رقم.",
   too_many: "عندك طلبين لسه مستنيين تأكيد. استنى رد العيادة الأول.",
+  busy: "العيادة مستقبلة طلبات كتير دلوقتي. جرب بعد شوية أو اتصل بالعيادة.",
+  unknown_clinic: "رابط الحجز غير صحيح أو الحجز متوقف دلوقتي. اطلب الرابط من العيادة.",
   net: "مفيش اتصال بالإنترنت أو الخدمة مش شغالة دلوقتي. جرب تاني بعد شوية."
 };
 let slots = {}, selDate = null, selTime = null, busy = false;
 
-$("docName").textContent = CONFIG.doctorName;
-$("docSub").textContent = CONFIG.specialty + " - " + CONFIG.clinic;
-document.title = "حجز كشف - " + CONFIG.doctorName;
+function showBad(k) {
+  $("pick").classList.add("hidden"); $("bar").classList.add("hidden");
+  const e = $("bad"); e.textContent = ERR[k] || ERR.net; e.classList.remove("hidden");
+}
+async function init() {
+  if (!CLINIC) return showBad("unknown_clinic");
+  try {
+    const r = await fetch(CONFIG.scriptUrl + "?action=clinic&d=" + encodeURIComponent(CLINIC));
+    const j = await r.json();
+    if (!j.ok) return showBad("unknown_clinic");
+    $("docName").textContent = j.name;
+    $("docSub").textContent = [j.specialty, j.clinic].filter(Boolean).join(" - ");
+    document.title = "حجز كشف - " + j.name;
+  } catch (e) { return showBad("net"); }
+  load();
+}
 
 function parse(d) { const [y, m, dd] = d.split("-").map(Number); return new Date(y, m - 1, dd); }
 function fmtTime(t) {
@@ -161,7 +173,7 @@ function sync() {
 
 async function load() {
   try {
-    const r = await fetch(CONFIG.scriptUrl + "?action=slots");
+    const r = await fetch(CONFIG.scriptUrl + "?action=slots&d=" + encodeURIComponent(CLINIC));
     const j = await r.json();
     slots = {};
     (j.slots || []).forEach(s => { (slots[s.date] = slots[s.date] || []).push(s.time); });
@@ -180,7 +192,7 @@ $("go").onclick = async () => {
     const r = await fetch(CONFIG.scriptUrl, {
       method: "POST",
       headers: { "Content-Type": "text/plain;charset=utf-8" },   // plain text avoids a CORS preflight on Apps Script
-      body: JSON.stringify({ action: "book", date: selDate, time: selTime, name, phone, reason: $("reason").value.trim(), website: $("website").value })
+      body: JSON.stringify({ action: "book", d: CLINIC, date: selDate, time: selTime, name, phone, reason: $("reason").value.trim(), website: $("website").value })
     });
     const j = await r.json();
     if (j.ok) {
@@ -196,7 +208,7 @@ $("go").onclick = async () => {
   busy = false; $("go").textContent = "احجز"; sync();
 };
 
-load();
+init();
 </script>
 </body>
 </html>
